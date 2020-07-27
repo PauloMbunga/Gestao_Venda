@@ -1,0 +1,81 @@
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pu="http://primefaces.org/ultima">
+
+    <h:form id="menuform">
+        <div class="layout-menu #{guestPreferences.menuClass}">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
+                    <ui:fragment rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
+                        <div class="profile">
+                            <div class="profile-image"></div>
+                            <a id="profile-options" href="#">
+                                <span class="profile-name">#{seguranca.nomeUsuario}</span>
+                                <i class="material-icons">&#xE313;</i>
+                            </a>
+                        </div>
+
+                        <ul id="profile-menu" class="ultima-menu">
+
+
+                            <li role="menuitem">
+                                <a href="/Gestao_Venda/logout" class="ripplelink">
+                                    <i class="material-icons">&#xE8AC;</i>
+                                    
+                                    <span>Sair</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ui:fragment>
+
+                    <pu:menu widgetVar="me">
+                       <p:menuitem value="Home" icon="fa fa-home" url="#"/>
+                        <p:separator  style="width: 250px; height: 1px; background: #9e9e9e;" />
+                         <p:submenu icon="fa fa-cogs" label="Configurações">
+                            <p:menuitem value="Direcções" icon="fa fa-files-o" url="#" />
+                            <p:menuitem value="Departamentos" icon="fa fa-bank" url="#" />
+                            <p:menuitem value="Gestão de Funcionarios" icon="fa fa-users" url="#" />
+                        </p:submenu>
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                      <p:submenu icon="fa fa-list" label="Cadastros">
+                            <p:menuitem value="Empresa" icon="fa fa-files-o" url="/Gestao_Venda/dps/FN/cadastros/cadastrarEmpresa.xhtml" />
+                            <p:menuitem value="Cadastro 1" icon="fa fa-files-o" url="/Gestao_Venda/dps/FN/cadastrarProduto.xhtml" />
+                            <p:menuitem value="Cadastro 2" icon="fa fa-bank" url="/Gestao_Venda/dps/FN/cadastrarProduto2.xhtml" />
+                            <p:menuitem value="Cadastro 3" icon="fa fa-users" url="/Gestao_Venda/dps/FN/cadastrarProduto3.xhtml" />
+                        </p:submenu>
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:submenu icon="fa fa-barcode" label="Produtos">
+                            <p:menuitem value="Direcções" icon="fa fa-files-o" url="#" />
+                            <p:menuitem value="Departamentos" icon="fa fa-bank" url="#" />
+                            <p:menuitem value="Gestão de Funcionarios" icon="fa fa-users" url="#" />
+                        </p:submenu>
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                      <p:submenu icon="fa fa-shopping-cart" label="Vendas">
+                            <p:menuitem value="Direcções" icon="fa fa-files-o" url="#" />
+                            <p:menuitem value="Departamentos" icon="fa fa-bank" url="#" />
+                            <p:menuitem value="Gestão de Funcionarios" icon="fa fa-users" url="#" />
+                        </p:submenu>
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                      <p:submenu icon="fa fa-inbox" label="Estoque">
+                            <p:menuitem value="Direcções" icon="fa fa-files-o" url="#" />
+                            <p:menuitem value="Departamentos" icon="fa fa-bank" url="#" />
+                            <p:menuitem value="Gestão de Funcionarios" icon="fa fa-users" url="#" />
+                        </p:submenu>
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                      <p:submenu icon="fa fa-bar-chart-o" label="Relatórios">
+                            <p:menuitem value="Direcções" icon="fa fa-files-o" url="#" />
+                            <p:menuitem value="Departamentos" icon="fa fa-bank" url="#" />
+                            <p:menuitem value="Gestão de Funcionarios" icon="fa fa-users" url="#" />
+                        </p:submenu>
+                       
+                         <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                    </pu:menu>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

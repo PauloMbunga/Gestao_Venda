@@ -1,0 +1,273 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Venda</ui:define>
+
+    <ui:define name="content">
+        <style type="text/css">
+
+            /*#bMRH{
+                width: 157px;
+                height: 143px;
+                background: url("resources/ultima-layout/images/bMRH.png") no-repeat;
+            }
+            #bMRH:hover{
+                width: 157px;
+                height: 143px;
+                background: url("resources/ultima-layout/images/bMRHHover.png") no-repeat;
+            }
+            #bMBU{
+                width: 157px;
+                height: 143px; 
+                background: url("resources/ultima-layout/images/bMBU.png") no-repeat;
+            }
+            #bMBU:hover{
+                width: 157px;
+                height: 143px;
+                background: url("resources/ultima-layout/images/bMBUHover.png") no-repeat;
+            }
+            */
+            #bMFT{
+                width: 157px;
+                height: 143px; 
+                background: url("resources/ultima-layout/images/butt4.png") no-repeat;
+            }
+            #bMFT:hover{
+                width: 157px;
+                height: 143px;
+                background: url("resources/ultima-layout/images/butt4Hover.png") no-repeat;
+            }
+            #bMES{
+                width: 157px;
+                height: 143px;
+                background: url("resources/ultima-layout/images/butt3.png") no-repeat;
+            }
+            #bMES:hover{
+                width: 157px;
+                height: 143px;
+                background: url("resources/ultima-layout/images/butt3Hover.png") no-repeat;
+            }
+            #bMGAD{
+                width: 157px;
+                height: 143px; 
+                background: url("resources/ultima-layout/images/bt1Ag.png") no-repeat;
+            }
+            #bMGAD:hover{
+                width: 157px;
+                height: 143px; 
+                background: url("resources/ultima-layout/images/butt1Hover.png") no-repeat;
+            }
+
+
+            #bMF{
+                width: 157px;
+                height: 143px; 
+                background: url("resources/ultima-layout/images/butt2.png") no-repeat;
+            }
+            #bMF:hover{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/butt2Hover.png") no-repeat;
+            }
+            /*
+            #bMFA{
+                width: 157px;
+                height: 143px; 
+                background: url("resources/ultima-layout/images/bMFA.png") no-repeat;
+            }
+            #bMFA:hover{
+                width: 157px;
+                height: 143px; 
+                background: url("resources/ultima-layout/images/bMFAHover.png") no-repeat;
+            }
+            #bMCT{
+                width: 157px;
+                height: 143px; 
+                background: url("resources/ultima-layout/images/bMCT.png") no-repeat;
+            }
+            #bMCT:hover{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/bMCTHover.png") no-repeat;
+            }
+            #bMSD{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/bMSD.png") no-repeat;
+            }
+            #bMSD:hover{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/bMSDHover.png") no-repeat;
+            }
+            #btMGI{
+                width: 157px;
+                height: 143px;   
+                background: url("resources/ultima-layout/images/bMGI.png") no-repeat;
+            }
+            #btMGI:hover{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/bMGLHover.png") no-repeat;
+            }
+            #bMGSE{
+                width: 157px;
+                height: 143px;   
+                background: url("resources/ultima-layout/images/bMGSE.png") no-repeat;
+            }
+            #bMGSE:hover{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/bMGSHover.png") no-repeat;
+            }
+            #bMGL{
+                width: 157px;
+                height: 143px;   
+                background: url("resources/ultima-layout/images/bMGL.png") no-repeat;
+            }
+            #bMGL:hover{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/bMGIHover.png") no-repeat;
+            }
+            #bMGAM{
+                width: 157px;
+                height: 143px;    
+                background: url("resources/ultima-layout/images/bMGAM.png") no-repeat;
+            }
+            #bMGAM:hover{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/bMGAHover.png") no-repeat;
+            }
+            #bMCM{
+                width: 157px;
+                height: 143px;     
+                background: url("resources/ultima-layout/images/bMCM.png") no-repeat;
+            }
+            #bMCM:hover{
+                width: 157px;
+                height: 143px;   
+                background: url("resources/ultima-layout/images/bMCMHover.png") no-repeat;
+            }
+            #bMSGR{
+                width: 157px; 
+                height: 143px;      
+                background: url("resources/ultima-layout/images/bMSGR.png") no-repeat;
+            }
+            #bMSGR:hover{
+                width: 157px; 
+                height: 143px;    
+                background: url("resources/ultima-layout/images/bMSGRHover.png") no-repeat;
+            }
+            #bMPM{
+                width: 157px;
+                height: 143px;      
+                background: url("resources/ultima-layout/images/bMPM.png") no-repeat;
+            }
+            #bMPM:hover{
+                width: 157px;
+                height: 143px;     
+                background: url("resources/ultima-layout/images/bMPMHover.png") no-repeat;
+            }
+            #bMGSI{
+                width: 157px;
+                height: 143px;     
+                background: url("resources/ultima-layout/images/bMGSI.png") no-repeat;
+            }
+            #bMGSI:hover{
+                width: 157px;
+                height: 143px;    
+                background: url("resources/ultima-layout/images/bMGSIHover.png") no-repeat;
+            }
+            #bMGP{
+                width: 157px;
+                height: 143px;     
+                background: url("resources/ultima-layout/images/bMGP.png") no-repeat;
+            }
+            #bMGP:hover{
+                width: 157px;
+                height: 143px;    
+                background: url("resources/ultima-layout/images/bMGPHover.png") no-repeat;
+            }
+            #bMCP{
+                width: 157px;
+                height: 143px;    
+                background: url("resources/ultima-layout/images/bMCP.png") no-repeat;
+            }
+            #bMCP:hover{
+                width: 157px;
+                height: 143px;     
+                background: url("resources/ultima-layout/images/bMCPHover.png") no-repeat;
+            }
+            #bMCC{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/bMCC.png") no-repeat;
+            }
+            #bMCC:hover{
+                width: 157px;
+                height: 143px;  
+                background: url("resources/ultima-layout/images/bMCCHover.png") no-repeat;
+            }*/
+            #geral{
+
+                margin-top: 125px;
+                height: 150px;
+                clear: none;
+
+            }
+
+            #contentor{
+                height: 280px;
+
+            }
+
+        </style>
+        <div class="ui-g">
+            <div class="ui-g-12">
+                <div class="card" >
+                    <div id="contentor">
+
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <!--<h1>Bemvindo ao Sistema Integrado de Gestão Hospitalar do Prenda</h1>-->
+                        <p:button outcome="/index" value="Menu Principal" style=" width: 150px;margin-bottom:10px;" styleClass="flat"/>
+
+                        <!--p:panel style=" height: 550px;" rendered="true" id="basic23" header="Menus de Acesso" >
+                            <p:tabView style=" width: 100%; height: 500px;" id="basic" >
+
+                                <p:tab title="Operaçaõ 1">
+                                    
+                                    
+                                </p:tab>
+                                <p:tab title="Operação 2">
+                                    <div style="margin-top: -5px; width: 157px; height: 143px;">
+                                        <h:panelGroup rendered="true" titleStyleClass="ui-icon-person">
+                                        <a href="form1.xhtml"><div id="bMGAD">
+                                        <p:graphicImage style="width: 157px; height: 143px; " name="images/bMFA.png" library="ultima-layout" />
+                                        </h:panelGroup>
+
+                                    </div></a>
+                                    
+                                </p:tab>
+
+                            </p:tabView>
+                        </p:panel-->        
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,69 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pu="http://primefaces.org/ultima">
+    
+    <h:form id="menuform"> 
+        <div class="layout-menu #{guestPreferences.menuClass}">
+            <div class="nano">
+                <div class="nano-content menu-scroll-content">
+                    <ui:fragment rendered="#{guestPreferences.profileMode == 'inline' and guestPreferences.menuLayout != 'menu-layout-static menu-layout-horizontal'}">
+                        <div class="profile">
+                            <div class="profile-image"></div>
+                            <a id="profile-options" href="#">
+                                <span class="profile-name">Nome do Usuário</span>
+                                <i class="material-icons">&#xE313;</i>
+                            </a>
+                        </div>
+                    
+                        <ul id="profile-menu" class="ultima-menu">
+                            
+                            
+                            <li role="menuitem">
+                                <a href="login.xhtml" class="ripplelink">
+                                    <i class="material-icons">&#xE8AC;</i>
+                                    <span>Sair</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </ui:fragment>
+                    
+                    <pu:menu widgetVar="me">
+                        <p:menuitem value="Home" icon="fa fa-home" outcome="/index"/>
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:menuitem icon="fa fa-edit" value="Contrato Invisível" outcome="/YHJform" />
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:menuitem icon="fa fa-edit" value="Factura" outcome="/form4" />
+                            
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:menuitem icon="fa fa-edit" value="Franquias" outcome="/form5" />
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:menuitem icon="fa fa-edit" value="Contratos de Capital" outcome="/form6" />
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:menuitem icon="fa fa-legal" value="Leilão" outcome="/form7" />
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:menuitem icon="fa fa-calendar" value="Agendamento de OPE’s" outcome="/form8" />
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:submenu icon="fa fa-edit" label="Gestão de Status">
+                            <p:menuitem value="Status de Operações" icon="fa fa-edit" outcome="/form2" />
+                        </p:submenu>
+                        
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:submenu icon="fa fa-bar-chart-o" label="Estatistica Diária">
+                            <p:menuitem value="Conta do Remetente Inválida" icon="&#xE061;" />
+                            <p:menuitem value="Cliente com Saldo Insuficiente" icon="&#xE061;" />
+                            <p:menuitem value="Transação em Moeda Inválida" icon="&#xE061;" />
+                            <p:menuitem value="Outras" icon="&#xE061;" />
+                        </p:submenu> 
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        
+                     
+                    </pu:menu>
+                </div>
+            </div>
+        </div>
+    </h:form>
+</ui:composition>

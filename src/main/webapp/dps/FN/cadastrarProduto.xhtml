@@ -1,0 +1,84 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/dps/FN/templateFN.xhtml">
+
+    <ui:define name="title">Forms</ui:define>
+    <ui:define name="head">
+        <style type="text/css">
+            .nba-grid {
+                width: 100%;
+                table-layout: fixed;
+                word-wrap: break-word;
+            }
+
+            .ui-scrollpanel-content p:first-child {
+                margin: 0;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <f:metadata>
+           <f:viewParam name="dummy" />
+    		<f:event listener="#{cadastroUsuarioBean.inicializar}" type="preRenderView" />
+    	</f:metadata>
+        <h:form id="form">
+            <div class="ui-g ui-fluid">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+
+                        <h1 style="font-size:25px">Cadastrar Produto</h1>
+                        <p:messages id="context" autoUpdate="true" closable="true" />
+                        <p:toolbarGroup>
+
+                            <p:commandButton style="width:150px; margin-bottom: 10px;" icon="ui-icon-plus" immediate="true" value="Novo" rendered="#{seguranca.novoPermitido}"/>
+                           
+                        </p:toolbarGroup>
+                        <p:tabView id="tabCliente" >
+
+                            <p:tab>
+                                <f:facet name="title">
+                                    <i class="fa fa-file-pdf-o"></i>
+                                    <h:outputText value=" Carregamento"/>
+                                </f:facet>
+
+                                <p:panelGrid id="panelCliente"  columns="2" layout="grid" style="margin-bottom:2px;" styleClass="ui-panelgrid-blank form-group">
+
+                                    <h:panelGroup>
+                                        <label>Produto:</label><br />
+                                        <p:inputText style="width: 100%;" required="true" requiredMessage="Preencher o campo correctamente"  />
+                                    </h:panelGroup>
+                                    <h:panelGroup>
+                                    <p:selectOneMenu id="categoria">
+	    			<f:selectItem itemLabel="Selecione a categoria"/>
+	    			<f:selectItems value="#{cadastroUsuarioBean.categoriasRaizes}" var="categoria"
+	    				itemValue="#{categoria}" itemLabel="#{categoria.nome}" />
+	    		</p:selectOneMenu>
+                                    
+                                        <label>Código:</label><br />
+                                        <p:inputText style="width: 100%;" required="true" requiredMessage="Preencher o campo correctamente" />
+                                    </h:panelGroup>
+                                    <h:outputText value="#{precoProdutoBean.preco}" />
+                                    
+                                </p:panelGrid>
+
+                            </p:tab>
+
+
+                        </p:tabView>
+                       
+                       
+
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

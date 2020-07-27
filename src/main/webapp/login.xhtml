@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html" 
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"> 
+
+
+
+
+    <h:head>
+        <f:facet name="first">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+            <meta name="apple-mobile-web-app-capable" content="yes" />
+        </f:facet>
+        <title>WSOFT</title>
+        <h:outputScript name="js/ripple.js" library="ultima-layout" />
+        <h:outputScript name="js/layout.js" library="ultima-layout" />
+
+
+    </h:head>
+
+    <h:body styleClass="login-body">
+    <f:metadata>
+    		<f:viewParam name="dummy" />
+    		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
+    	</f:metadata>
+        <h:form id="form" prependId="false">
+            <div class="card login-panel ui-fluid">
+                <div class="ui-g">
+                    <div class="ui-g-12">
+                        <p:graphicImage style="width: 219px; height: 59px; margin-top: -35px;" name="images/login/logo.jpeg" library="ultima-layout" />
+                    </div>
+                    <p:messages id="messages" autoUpdate="true" closable="true" />
+                   
+                    <div class="ui-g-12">
+                        <h:panelGroup styleClass="md-inputfield" >
+
+                            <i style="color: #777d81; margin-left:1px; float: left; height: 4px; margin-top: 3px; " class="fa fa-user"></i>
+                           <p:inputText id="username" style=" width: 90%" value="#{loginBean.email}"/>
+                            <label style="margin-left: 16px">Usuário</label>
+                        </h:panelGroup>
+                    </div>
+                    <div class="ui-g-12">
+
+
+                        <h:panelGroup styleClass="md-inputfield"> 
+                            <i style="color: #777d81; margin-left:1px; float: left; height: 4px; margin-top: 3px; " class="fa fa-lock"></i>
+                             
+                            <p:password style=" width: 90%" id="password" />
+                            <label style="margin-left: 16px">Senha</label>
+                        </h:panelGroup>
+                    </div>
+                    <div class="ui-g-12">
+
+                        
+                        <p:commandButton icon="fa fa-sign-in" value="Login" action="#{loginBean.login}" ajax="false" />
+                        <p:commandButton icon="ui-icon-edit" value="Alterar a Senha" />
+                        <!--p:commandButton value="Esqueceu a sua senha" icon="ui-icon-help" style="background-color:#0315a7;" styleClass="indigo-btn"  /-->
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="login-footer" style="color: #053994;">SISTEMA DE GESTÃO DE VENDA</div>
+
+            <h:outputStylesheet name="css/ripple.css" library="ultima-layout" />
+            <h:outputStylesheet name="css/layout-#{guestPreferences.theme}.css" library="ultima-layout" />
+        </h:form>
+    </h:body>
+
+</html>
