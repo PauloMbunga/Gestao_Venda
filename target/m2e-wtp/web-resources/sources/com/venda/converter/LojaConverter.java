@@ -9,23 +9,23 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.venda.model.Empresa;
-import com.venda.repository.Empresas;
+import com.venda.model.Loja;
+import com.venda.repository.Lojas;
 
-@FacesConverter(forClass = Empresa.class)
+@FacesConverter(forClass = Loja.class)
 
-public class EmpresaConverter implements Converter {
+public class LojaConverter implements Converter {
 
 	@Inject
-	private Empresas Empresas;
+	private Lojas lojas;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
-		Empresa retorno = null;
+		Loja retorno = null;
 		
 		if (StringUtils.isNotEmpty(value)) {
 			Long id = new Long(value);
-			retorno = Empresas.porId(id);
+			retorno = lojas.porId(id);
 		}
 		
 		return retorno;
@@ -34,8 +34,8 @@ public class EmpresaConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Empresa empresa = (Empresa) value;
-			return empresa.getId() == null ? null : empresa.getId().toString();
+			Loja loja = (Loja) value;
+			return loja.getId() == null ? null : loja.getId().toString();
 		}
 		
 		return "";

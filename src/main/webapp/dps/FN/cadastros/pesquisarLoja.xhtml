@@ -24,8 +24,8 @@
 
     <ui:define name="content">
         <f:metadata>
-             <o:viewParam name="empresa" value="#{cadastroEmpresaBean.empresa}" />
-    		 <f:viewAction action="#{cadastroEmpresaBean.inicializar}" />
+             <o:viewParam name="Loja" value="#{cadastroLojaBean.loja}" />
+    		 <f:viewAction action="#{cadastroLojaBean.inicializar}" />
     	</f:metadata>
         <h:form id="frmPesquisa">
         <p:messages autoUpdate="true" closable="true" />
@@ -33,20 +33,20 @@
                 <div class="ui-g-12">
                     <div class="card card-w-title">
 
-                        <h1 style="font-size:25px">Pesquisar Empresa</h1>
+                        <h1 style="font-size:25px">Pesquisar Loja</h1>
                         
                         <p:toolbar>
                             <f:facet name="left">
                                                             
-                                <p:commandButton  value="Pesquisar" title="Pesquisar" icon="ui-icon-search" update="@form" action="#{pesquisarEmpresasBean.pesquisar}"/>
+                                <p:commandButton  value="Pesquisar" title="Pesquisar" icon="ui-icon-search" update="@form" action="#{pesquisarLojasBean.pesquisar}"/>
 	    				      
-	    				      <p:hotkey bind="ctrl+p"  update="@form" action="#{pesquisarEmpresasBean.pesquisar}"/>
+	    				      <p:hotkey bind="ctrl+p"  update="@form" action="#{pesquisarLojasBean.pesquisar}"/>
  
 	    			
                             
                             </f:facet>
                             <f:facet name="right">
-                                <p:button value="Novo" title="Novo" icon="ui-icon-plus" outcome="/dps/FN/cadastros/cadastrarEmpresa" />
+                                <p:button value="Novo" title="Novo" icon="ui-icon-plus" outcome="/dps/FN/cadastros/cadastrarLoja" />
                                 
                                
                             </f:facet>
@@ -58,54 +58,52 @@
                         
               <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
 	    			>
-	    		<p:outputLabel value="Nif" for="nif"/>
-	    		<p:inputText id="nif" size="20" value="#{pesquisarEmpresasBean.filtro.nif}" />
-	    		
+	    			
 	    		<p:outputLabel value="Nome" for="nome"/>
-	    		<p:inputText id="nome" size="60" value="#{pesquisarEmpresasBean.filtro.nome}" />
+	    		<p:inputText id="nome" size="60" value="#{pesquisarLojasBean.filtro.nome}" />
 	    	</p:panelGrid>
 	    	
-	    	<p:dataTable id="empresasTable" value="#{pesquisarEmpresasBean.empresasFiltrados}" var="empresa"
-	    		style="margin-top: 20px" emptyMessage="Nenhuma empresa encontrado." rows="20"
+	    	<p:dataTable id="LojasTable" value="#{pesquisarLojasBean.lojasFiltrados}" var="Loja"
+	    		style="margin-top: 20px" emptyMessage="Nenhuma Loja encontrado." rows="20"
 	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
                             
                             <f:facet name="header">
-                                Empresa
+                                Loja
                             </f:facet>
                             <p:column headerText="Id" >
-                                <h:outputText value="#{empresa.id}" />
+                                <h:outputText value="#{Loja.id}" />
                             </p:column>
 
                             <p:column headerText="Nome" >
-                                <h:outputText value="#{empresa.nome}" />
-                            </p:column>
-
-                            <p:column headerText="Nif" >
-                                <h:outputText value="#{empresa.nif}" />
+                                <h:outputText value="#{Loja.nome}" />
                             </p:column>
                             
+                            <p:column headerText="Empresa" >
+                                <h:outputText value="#{Loja.empresa.nome}" />
+                            </p:column>
+  
                             <p:column style="width: 100px; text-align: center">
-	    			<p:button outcome="/dps/FN/cadastros/cadastrarEmpresa" icon="ui-icon-pencil" title="Editar">
-	    				<f:param name="empresa" value="#{empresa.id}" />
+	    			<p:button outcome="/dps/FN/cadastros/cadastrarLoja" icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="Loja" value="#{Loja.id}" />
 	    			</p:button>
 	    			
 	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
 	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
-	    				<f:setPropertyActionListener target="#{pesquisarEmpresasBean.empresaSelecionado}" 
-	    					value="#{empresa}" />
+	    				<f:setPropertyActionListener target="#{pesquisarLojasBean.lojaSelecionado}" 
+	    					value="#{Loja}" />
 	    			</p:commandButton>
 	    		</p:column>
 
                             
                         </p:dataTable>
                         
-                       <p:confirmDialog header="Exclusão de empresa" 
-	    		message="Tem certeza que deseja excluir a Empresa #{pesquisarEmpresasBean.empresaSelecionado.nome}?"
+                       <p:confirmDialog header="Exclusão de Loja" 
+	    		message="Tem certeza que deseja excluir a Loja #{pesquisarLojasBean.lojaSelecionado.nome}?"
 	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
 	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
 	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
-	    			action="#{pesquisarEmpresasBean.excluir}" process="@this"
-	    			update=":frmPesquisa:empresasTable" />
+	    			action="#{pesquisarLojasBean.excluir}" process="@this"
+	    			update=":frmPesquisa:LojasTable" />
 	    	</p:confirmDialog>
                            
 

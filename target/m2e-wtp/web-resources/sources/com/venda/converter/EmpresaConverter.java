@@ -34,8 +34,8 @@ public class EmpresaConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Empresa Empresa = (Empresa) value;
-			return Empresa.getId() == null ? null : Empresa.getId().toString();
+			Empresa empresa = (Empresa) value;
+			return empresa.getId() == null ? null : empresa.getId().toString();
 		}
 		
 		return "";

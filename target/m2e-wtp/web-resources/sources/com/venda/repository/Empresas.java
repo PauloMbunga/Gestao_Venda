@@ -39,7 +39,7 @@ public class Empresas implements Serializable {
 	}
 	
 	
-	public List<Empresa> empresas() {
+	public List<Empresa> lista_empresas() {
 		
 		return this.manager.createQuery("from Empresa", Empresa.class)
 				.getResultList();
@@ -58,10 +58,10 @@ public class Empresas implements Serializable {
 
 
 	@Transactional
-	public void remover(Empresa Empresa) throws NegocioException {
+	public void remover(Empresa empresa) throws NegocioException {
 		try {
-			Empresa = porId(Empresa.getId());
-			manager.remove(Empresa);
+			empresa = porId(empresa.getId());
+			manager.remove(empresa);
 			manager.flush();
 		} catch (PersistenceException e) {
 			throw new NegocioException("Empresa não pode ser excluído.");
@@ -84,7 +84,7 @@ public class Empresas implements Serializable {
 		List<Predicate> predicates = new ArrayList<>();
 		
 		Root<Empresa> EmpresaRoot = criteriaQuery.from(Empresa.class);
-		////categoriaJoin.fetch("categoriaPai", JoinType.INNER);
+		
 		
 		if (StringUtils.isNotBlank(filtro.getNif())) {
 			predicates.add(builder.equal(EmpresaRoot.get("nif"), filtro.getNif()));
