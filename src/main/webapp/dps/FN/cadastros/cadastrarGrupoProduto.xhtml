@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/dps/FN/templateFN.xhtml">
+
+    <ui:define name="title">Forms</ui:define>
+    <ui:define name="head">
+        <style type="text/css">
+            .nba-grid {
+                width: 100%;
+                table-layout: fixed;
+                word-wrap: break-word;
+            }
+
+            .ui-scrollpanel-content p:first-child {
+                margin: 0;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <f:metadata>
+             <o:viewParam name="grupoProduto" value="#{cadastroGrupoProdutoBean.grupoProduto}" />
+    		 <f:viewAction action="#{cadastroGrupoProdutoBean.inicializar}" />
+    	</f:metadata>
+        <h:form id="form">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+
+                        <h1 style="font-size:25px">#{cadastroGrupoProdutoBean.editando ? 'Edição de Grupo Produto' : 'Cadastrar Grupo Produto'}</h1>
+                        <p:messages autoUpdate="true" closable="true" />
+                        <p:toolbar>
+                            <f:facet name="left">
+                                <p:button  value="Novo" icon="ui-icon-plus" outcome="/dps/FN/cadastros/cadastrarGrupoProduto" />
+                              
+                                <span class="ui-separator" style="padding-right: 5px;">
+                                    <span class="fa fa-ellipsis-v SoftGray" />
+                                </span>
+                                <p:commandButton  value="Salvar" title="Salvar" icon="ui-icon-save" update="@form" action="#{cadastroGrupoProdutoBean.salvar}"/>
+	    				      
+	    				      <p:hotkey bind="ctrl+s"  update="@form" action="#{cadastroGrupoProdutoBean.salvar}"/>
+ 
+	    			
+                            
+                            </f:facet>
+                            <f:facet name="right">
+                                <p:button value="Pesquisar" title="Pesquisar" icon="ui-icon-search" outcome="/dps/FN/cadastros/pesquisarGrupoProduto" />
+                                
+                               
+                            </f:facet>
+                        </p:toolbar>
+                        
+                     </div>   
+                     
+                     <div class="card card-w-title">
+                        
+                             <p:panelGrid id="panelCliente"  columns="2" layout="grid" style="margin-bottom:2px;" styleClass="ui-panelgrid-blank form-group">
+
+                                  <h:panelGroup>
+                                        <label>Descrição:</label><br />
+                                       <p:inputText style="width: 100%;" id="descricao"  required="true"  requiredMessage="Informe a descrição" value="#{cadastroGrupoProdutoBean.grupoProduto.descricao}"/>
+                                  </h:panelGroup>
+                                  <h:panelGroup>
+                                   
+                                       
+                                  </h:panelGroup>
+                                   
+                                    
+                             </p:panelGrid>
+
+                           
+
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

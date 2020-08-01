@@ -1,0 +1,120 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/dps/FN/templateFN.xhtml">
+
+    <ui:define name="title">Pesquisar</ui:define>
+    <ui:define name="head">
+        <style type="text/css">
+            .nba-grid {
+                width: 100%;
+                table-layout: fixed;
+                word-wrap: break-word;
+            }
+
+            .ui-scrollpanel-content p:first-child {
+                margin: 0;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <f:metadata>
+             <o:viewParam name="fornecedor" value="#{cadastroFornecedorBean.fornecedor}" />
+    		 <f:viewAction action="#{cadastroFornecedorBean.inicializar}" />
+    	</f:metadata>
+        <h:form id="frmPesquisa">
+        <p:messages autoUpdate="true" closable="true" />
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+
+                        <h1 style="font-size:25px">Pesquisar Fornecedor</h1>
+                        
+                        <p:toolbar>
+                            <f:facet name="left">
+                                                            
+                                <p:commandButton  value="Pesquisar" title="Pesquisar" icon="ui-icon-search" update="@form" action="#{pesquisarFornecedoresBean.pesquisar}"/>
+	    				      
+	    				      <p:hotkey bind="ctrl+p"  update="@form" action="#{pesquisarFornecedoresBean.pesquisar}"/>
+ 
+	    			
+                            
+                            </f:facet>
+                            <f:facet name="right">
+                                <p:button value="Novo" title="Novo" icon="ui-icon-plus" outcome="/dps/FN/cadastros/cadastrarFornecedor" />
+                                
+                               
+                            </f:facet>
+                        </p:toolbar>
+                        
+                     </div>   
+                     
+                     <div class="card card-w-title">
+                        
+              <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+	    			>
+	    		<p:outputLabel value="Nif" for="nif"/>
+	    		<p:inputText id="nif" size="20" value="#{pesquisarFornecedoresBean.filtro.nif}" />
+	    		
+	    		<p:outputLabel value="Nome" for="nome"/>
+	    		<p:inputText id="nome" size="60" value="#{pesquisarFornecedoresBean.filtro.nome}" />
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="fornecedoresTable" value="#{pesquisarFornecedoresBean.fornecedoresFiltrados}" var="fornecedor"
+	    		style="margin-top: 20px" emptyMessage="Nenhuma fornecedor encontrado." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+                            
+                            <f:facet name="header">
+                                Fornecedor
+                            </f:facet>
+                            <p:column headerText="Id" >
+                                <h:outputText value="#{fornecedor.id}" />
+                            </p:column>
+
+                            <p:column headerText="Nome" >
+                                <h:outputText value="#{fornecedor.nome}" />
+                            </p:column>
+
+                            <p:column headerText="Nif" >
+                                <h:outputText value="#{fornecedor.nif}" />
+                            </p:column>
+                            
+                            <p:column style="width: 100px; text-align: center">
+	    			<p:button outcome="/dps/FN/cadastros/cadastrarFornecedor" icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="fornecedor" value="#{fornecedor.id}" />
+	    			</p:button>
+	    			
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{pesquisarFornecedoresBean.fornecedorSelecionado}" 
+	    					value="#{fornecedor}" />
+	    			</p:commandButton>
+	    		</p:column>
+
+                            
+                        </p:dataTable>
+                        
+                       <p:confirmDialog header="Exclusão de fornecedor" 
+	    		message="Tem certeza que deseja excluir a Fornecedor #{pesquisarFornecedoresBean.fornecedorSelecionado.nome}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+	    			action="#{pesquisarFornecedoresBean.excluir}" process="@this"
+	    			update=":frmPesquisa:fornecedoresTable" />
+	    	</p:confirmDialog>
+                           
+
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

@@ -1,0 +1,116 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/dps/FN/templateFN.xhtml">
+
+    <ui:define name="title">Pesquisar</ui:define>
+    <ui:define name="head">
+        <style type="text/css">
+            .nba-grid {
+                width: 100%;
+                table-layout: fixed;
+                word-wrap: break-word;
+            }
+
+            .ui-scrollpanel-content p:first-child {
+                margin: 0;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <f:metadata>
+             <o:viewParam name="formaPagamento" value="#{cadastroFormaPagamentoBean.formaPagamento}" />
+    		 <f:viewAction action="#{cadastroFormaPagamentoBean.inicializar}" />
+    	</f:metadata>
+        <h:form id="frmPesquisa">
+        <p:messages autoUpdate="true" closable="true" />
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+
+                        <h1 style="font-size:25px">Pesquisar FormaPagamento</h1>
+                        
+                        <p:toolbar>
+                            <f:facet name="left">
+                                                            
+                                <p:commandButton  value="Pesquisar" title="Pesquisar" icon="ui-icon-search" update="@form" action="#{pesquisarFormaPagamentosBean.pesquisar}"/>
+	    				      
+	    				      <p:hotkey bind="ctrl+p"  update="@form" action="#{pesquisarFormaPagamentosBean.pesquisar}"/>
+ 
+	    			
+                            
+                            </f:facet>
+                            <f:facet name="right">
+                                <p:button value="Novo" title="Novo" icon="ui-icon-plus" outcome="/dps/FN/cadastros/cadastrarFormaPagamento" />
+                                
+                               
+                            </f:facet>
+                        </p:toolbar>
+                        
+                     </div>   
+                     
+                     <div class="card card-w-title">
+                        
+              <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+	    			>
+	    		
+	    		<p:outputLabel value="Descricao" for="descricao"/>
+	    		<p:inputText id="descricao" size="60" value="#{pesquisarFormaPagamentosBean.filtro.descricao}" />
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="formaPagamentosTable" value="#{pesquisarFormaPagamentosBean.formaPagamentosFiltrados}" var="formaPagamento"
+	    		style="margin-top: 20px" emptyMessage="Nenhuma forma de Pagamento encontrado." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+                            
+                            <f:facet name="header">
+                                FormaPagamento
+                            </f:facet>
+                            <p:column headerText="Id" >
+                                <h:outputText value="#{formaPagamento.id}" />
+                            </p:column>
+
+                            <p:column headerText="Descricao" >
+                                <h:outputText value="#{formaPagamento.descricao}" />
+                            </p:column>
+
+                            
+                            
+                            <p:column style="width: 100px; text-align: center">
+	    			<p:button outcome="/dps/FN/cadastros/cadastrarFormaPagamento" icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="formaPagamento" value="#{formaPagamento.id}" />
+	    			</p:button>
+	    			
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{pesquisarFormaPagamentosBean.formaPagamentoSelecionado}" 
+	    					value="#{formaPagamento}" />
+	    			</p:commandButton>
+	    		</p:column>
+
+                            
+                        </p:dataTable>
+                        
+                       <p:confirmDialog header="Exclusão de Forma de Pagamento" 
+	    		message="Tem certeza que deseja excluir a FormaPagamento #{pesquisarFormaPagamentosBean.formaPagamentoSelecionado.descricao}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+	    			action="#{pesquisarFormaPagamentosBean.excluir}" process="@this"
+	    			update=":frmPesquisa:formaPagamentosTable" />
+	    	</p:confirmDialog>
+                           
+
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

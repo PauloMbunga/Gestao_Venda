@@ -37,7 +37,7 @@ public class Lojas implements Serializable {
 	}
 	
 	
-	public List<Loja> lojas() {
+	public List<Loja> lista_lojas() {
 		
 		return this.manager.createQuery("from Loja", Loja.class)
 				.getResultList();
