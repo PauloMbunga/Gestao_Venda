@@ -24,8 +24,8 @@
 
     <ui:define name="content">
         <f:metadata>
-             <o:viewParam name="grupoProduto" value="#{cadastroGrupoProdutoBean.grupoProduto}" />
-    		 <f:viewAction action="#{cadastroGrupoProdutoBean.inicializar}" />
+             <o:viewParam name="unidadeProduto" value="#{cadastroUnidadeProdutoBean.unidadeProduto}" />
+    		 <f:viewAction action="#{cadastroUnidadeProdutoBean.inicializar}" />
     	</f:metadata>
         <h:form id="frmPesquisa">
         <p:messages autoUpdate="true" closable="true" />
@@ -33,20 +33,20 @@
                 <div class="ui-g-12">
                     <div class="card card-w-title">
 
-                        <h1 style="font-size:25px">Pesquisar GrupoProduto</h1>
+                        <h1 style="font-size:25px">Pesquisar Unidade de Produto</h1>
                         
                         <p:toolbar>
                             <f:facet name="left">
                                                             
-                                <p:commandButton  value="Pesquisar" title="Pesquisar" icon="ui-icon-search" update="@form" action="#{pesquisarGrupoProdutosBean.pesquisar}"/>
+                                <p:commandButton  value="Pesquisar" title="Pesquisar" icon="ui-icon-search" update="@form" action="#{pesquisarUnidadeProdutosBean.pesquisar}"/>
 	    				      
-	    				      <p:hotkey bind="ctrl+p"  update="@form" action="#{pesquisarGrupoProdutosBean.pesquisar}"/>
+	    				      <p:hotkey bind="ctrl+p"  update="@form" action="#{pesquisarUnidadeProdutosBean.pesquisar}"/>
  
 	    			
                             
                             </f:facet>
                             <f:facet name="right">
-                                <p:button value="Novo" title="Novo" icon="ui-icon-plus" outcome="/dps/FN/cadastros/cadastrarGrupoProduto" />
+                                <p:button value="Novo" title="Novo" icon="ui-icon-plus" outcome="/dps/FN/cadastros/cadastrarUnidadeProduto" />
                                 
                                
                             </f:facet>
@@ -60,35 +60,35 @@
 	    			>
 	    		
 	    		<p:outputLabel value="Descricao" for="descricao"/>
-	    		<p:inputText id="descricao" size="60" value="#{pesquisarGrupoProdutosBean.filtro.descricao}" />
+	    		<p:inputText id="descricao" size="60" value="#{pesquisarUnidadeProdutosBean.filtro.descricao}" />
 	    	</p:panelGrid>
 	    	
-	    	<p:dataTable id="grupoProdutosTable" value="#{pesquisarGrupoProdutosBean.grupoProdutosFiltrados}" var="grupoProduto"
-	    		style="margin-top: 20px" emptyMessage="Nenhuma forma de Pagamento encontrado." rows="20"
+	    	<p:dataTable id="unidadeProdutosTable" value="#{pesquisarUnidadeProdutosBean.unidadeProdutosFiltrados}" var="unidadeProduto"
+	    		style="margin-top: 20px" emptyMessage="Nenhuma unidade de Produto encontrado." rows="20"
 	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
                             
                             <f:facet name="header">
-                                GrupoProduto
+                                UnidadeProduto
                             </f:facet>
                             <p:column headerText="Id" >
-                                <h:outputText value="#{grupoProduto.id}" />
+                                <h:outputText value="#{unidadeProduto.id}" />
                             </p:column>
 
                             <p:column headerText="Descricao" >
-                                <h:outputText value="#{grupoProduto.descricao}" />
+                                <h:outputText value="#{unidadeProduto.descricao}" />
                             </p:column>
 
                             
                             
                             <p:column style="width: 100px; text-align: center">
-	    			<p:button outcome="/dps/FN/cadastros/cadastrarGrupoProduto" icon="ui-icon-pencil" title="Editar">
-	    				<f:param name="grupoProduto" value="#{grupoProduto.id}" />
+	    			<p:button outcome="/dps/FN/cadastros/cadastrarUnidadeProduto" icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="unidadeProduto" value="#{unidadeProduto.id}" />
 	    			</p:button>
 	    			
 	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
 	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
-	    				<f:setPropertyActionListener target="#{pesquisarGrupoProdutosBean.grupoProdutoSelecionado}" 
-	    					value="#{grupoProduto}" />
+	    				<f:setPropertyActionListener target="#{pesquisarUnidadeProdutosBean.unidadeProdutoSelecionado}" 
+	    					value="#{unidadeProduto}" />
 	    			</p:commandButton>
 	    		</p:column>
 
@@ -96,12 +96,12 @@
                         </p:dataTable>
                         
                        <p:confirmDialog header="Exclusão de Grupo Produto" 
-	    		message="Tem certeza que deseja excluir a GrupoProduto #{pesquisarGrupoProdutosBean.grupoProdutoSelecionado.descricao}?"
+	    		message="Tem certeza que deseja excluir a UnidadeProduto #{pesquisarUnidadeProdutosBean.unidadeProdutoSelecionado.descricao}?"
 	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
 	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
 	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
-	    			action="#{pesquisarGrupoProdutosBean.excluir}" process="@this"
-	    			update=":frmPesquisa:grupoProdutosTable" />
+	    			action="#{pesquisarUnidadeProdutosBean.excluir}" process="@this"
+	    			update=":frmPesquisa:unidadeProdutosTable" />
 	    	</p:confirmDialog>
                            
 

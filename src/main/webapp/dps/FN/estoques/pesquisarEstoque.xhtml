@@ -1,0 +1,151 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/dps/FN/templateFN.xhtml">
+
+    <ui:define name="title">Pesquisar</ui:define>
+    <ui:define name="head">
+        <style type="text/css">
+            .nba-grid {
+                width: 100%;
+                table-layout: fixed;
+                word-wrap: break-word;
+            }
+
+            .ui-scrollpanel-content p:first-child {
+                margin: 0;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <f:metadata>
+             <o:viewParam name="Estoque" value="#{cadastroEstoqueBean.estoque}" />
+    		 <f:viewAction action="#{cadastroEstoqueBean.inicializar}" />
+    	</f:metadata>
+        <h:form id="frmPesquisa">
+        <p:messages autoUpdate="true" closable="true" />
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+
+                        <h1 style="font-size:25px">Pesquisar Estoque</h1>
+                        
+                        <p:toolbar>
+                            <f:facet name="left">
+                                                            
+                                <p:commandButton  value="Pesquisar" title="Pesquisar" icon="ui-icon-search" update="@form" action="#{pesquisarEstoquesBean.pesquisar}"/>
+	    				      
+	    				      <p:hotkey bind="ctrl+p"  update="@form" action="#{pesquisarEstoquesBean.pesquisar}"/>
+ 
+                            </f:facet>
+                            <f:facet name="right">
+                                <p:button value="Novo" title="Novo" icon="ui-icon-plus" outcome="/dps/FN/estoques/cadastrarEstoque" />
+                                
+                               
+                            </f:facet>
+                        </p:toolbar>
+                        
+                     </div>   
+                     
+                     <div class="card card-w-title">
+                        
+              <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px">
+	    		
+	    		<p:outputLabel value="Descrição do Produto" for="produto"/>
+	    		<p:inputText id="produto"  value="#{pesquisarEstoquesBean.filtro.descricaoProduto}" />	
+	    		
+	    		<p:outputLabel value="Data da Compra" for="data_compra"/>
+	    		
+	    	     <p:calendar style="width: 100%;" id="data_compra" value="#{pesquisarEstoquesBean.filtro.data_compra}" />
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="EstoquesTable" value="#{pesquisarEstoquesBean.estoquesFiltrados}" var="Estoque"
+	    		style="margin-top: 20px" emptyMessage="Nenhum Estoque encontrado." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+                            
+                            <f:facet name="header">
+                                Estoque
+                            </f:facet>
+                            <p:column headerText="Id" >
+                                <h:outputText value="#{Estoque.id}" />
+                            </p:column>
+
+                            <p:column headerText="Produto" >
+                                <h:outputText value="#{Estoque.produto.descricao}" />
+                            </p:column>
+                            
+                            
+                            <p:column headerText="Peso" >
+                                <h:outputText value="#{Estoque.peso}" />
+                            </p:column>
+                            <p:column headerText="Unidade" >
+                                <h:outputText value="#{Estoque.unidadeProduto.descricao}" />
+                            </p:column>
+                            
+                            <p:column headerText="Valor do Custo" >
+                                <h:outputText value="#{Estoque.valor_custo}" />
+                            </p:column>
+                            
+                            <p:column headerText="Valor da Venda" >
+                                <h:outputText value="#{Estoque.valor_venda}" />
+                            </p:column>
+                            
+                            <p:column headerText="Quantidade em Estoque" >
+                                <h:outputText value="#{Estoque.qtd_actual}" />
+                            </p:column>
+                            
+                            <p:column headerText="Estoque Mínimo" >
+                                <h:outputText value="#{Estoque.estoque_min}" />
+                            </p:column>
+                            
+                            <p:column headerText="Estoque Máximo" >
+                                <h:outputText value="#{Estoque.estoque_max}" />
+                            </p:column>
+                             <p:column headerText="Data da Compra" >
+                                <h:outputText value="#{Estoque.data_compra}">
+                                 <f:convertDateTime pattern="dd MMM yyyy HH:mm" locale="pt" timeZone="GMT+1" />
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Loja" >
+                                <h:outputText value="#{Estoque.loja.nome}" />
+                            </p:column>
+  
+                            <p:column style="width: 100px; text-align: center">
+	    			<p:button outcome="/dps/FN/estoques/cadastrarEstoque" icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="Estoque" value="#{Estoque.id}" />
+	    			</p:button>
+	    			
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{pesquisarEstoquesBean.estoqueSelecionado}" 
+	    					value="#{Estoque}" />
+	    			</p:commandButton>
+	    		</p:column>
+
+                            
+                        </p:dataTable>
+                        
+                       <p:confirmDialog header="Exclusão de Estoque" 
+	    		message="Tem certeza que deseja excluir a Estoque #{pesquisarEstoquesBean.estoqueSelecionado.produto.descricao}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+	    			action="#{pesquisarEstoquesBean.excluir}" process="@this"
+	    			update=":frmPesquisa:EstoquesTable" />
+	    	</p:confirmDialog>
+                           
+
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

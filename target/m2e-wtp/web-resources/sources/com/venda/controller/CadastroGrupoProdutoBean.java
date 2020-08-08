@@ -48,7 +48,7 @@ public class CadastroGrupoProdutoBean implements Serializable {
 		this.grupoProduto = cadastroGrupoProdutoService.salvar(this.grupoProduto);
 		limpar();
 		
-		FacesUtil.addInfoMessage("Forma de Pagamento salva com sucesso!");
+		FacesUtil.addInfoMessage("Grupo de produto salva com sucesso!");
 		
 	   } catch (NegocioException ne) {
 		FacesUtil.addErrorMessage(ne.getMessage());

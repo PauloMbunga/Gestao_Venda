@@ -26,6 +26,8 @@
                                 <a href="/Gestao_Venda/logout" class="ripplelink">
                                     <i class="material-icons">&#xE8AC;</i>
                                     
+                                    
+                                    
                                     <span>Sair</span>
                                 </a>
                             </li>
@@ -56,21 +58,30 @@
                         </p:submenu>
                         <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
                         <p:submenu icon="fa fa-barcode" label="Produtos">
-                            <p:menuitem value="Direcções" icon="fa fa-files-o" url="#" />
+                            <p:menuitem value="Cadastro de Produtos" icon="fa fa-barcode" url="/Gestao_Venda/dps/FN/produtos/cadastrarProduto.xhtml" />
                             <p:menuitem value="Departamentos" icon="fa fa-bank" url="#" />
                             <p:menuitem value="Gestão de Funcionarios" icon="fa fa-users" url="#" />
                         </p:submenu>
                         <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:submenu icon="fa fa-barcode" label="Serviços">
+                            <p:menuitem value="Cadastro de Serviços" icon="fa fa-files-o" url="/Gestao_Venda/dps/FN/servicos/cadastrarServico.xhtml" />
+                            
+                        </p:submenu>
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
+                        <p:submenu icon="fa fa-barcode" label="Clientes">
+                            <p:menuitem value="Cadastro de Clientes" icon="fa fa-files-o" url="/Gestao_Venda/dps/FN/clientes/cadastrarCliente.xhtml" />
+                            
+                        </p:submenu>
+                        <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
                       <p:submenu icon="fa fa-shopping-cart" label="Vendas">
-                            <p:menuitem value="Direcções" icon="fa fa-files-o" url="#" />
-                            <p:menuitem value="Departamentos" icon="fa fa-bank" url="#" />
+                            <p:menuitem value="Abertura de Caixa" icon="fa fa-files-o" url="/Gestao_Venda/dps/FN/vendas/aberturaCaixa.xhtml" />
+                            <p:menuitem value="Venda Balcão" icon="fa fa-bank" action="#{paginaVendaBean.paginaVendaBalcao}" />
                             <p:menuitem value="Gestão de Funcionarios" icon="fa fa-users" url="#" />
                         </p:submenu>
                         <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
                       <p:submenu icon="fa fa-inbox" label="Estoque">
-                            <p:menuitem value="Direcções" icon="fa fa-files-o" url="#" />
-                            <p:menuitem value="Departamentos" icon="fa fa-bank" url="#" />
-                            <p:menuitem value="Gestão de Funcionarios" icon="fa fa-users" url="#" />
+                            <p:menuitem value="Cadastrar Estoque" icon="fa fa-files-o" url="/Gestao_Venda/dps/FN/estoques/cadastrarEstoque.xhtml" />
+                            
                         </p:submenu>
                         <p:separator style="width: 250px; height: 2px; background: #9e9e9e;" />
                       <p:submenu icon="fa fa-bar-chart-o" label="Relatórios">

@@ -1,0 +1,72 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/dps/FN/templateFNV.xhtml">
+
+    <ui:define name="title">Venda Balcão</ui:define>
+    
+    <ui:define name="head">
+        <style type="text/css">
+            .ui-button {
+                margin-right: 4px;
+            }
+            
+            .form-grid td {
+                padding: 16px 2px;
+            }
+
+            .md-inputfield .ui-selectonemenu > label {
+                color: transparent;
+            }
+
+            .md-inputfield .ui-selectonemenu.ui-state-filled > label {
+                color: #212121;
+            }
+            
+            
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                
+                
+                    <div class="card"   style="height:500px;margin: 30px; align-items: center; text-align:center;    box-shadow: 10px 20px 20px 0 rgba(0,0,0,0.2);">
+                        <h1 style="font-weight: bold; text-align: left; ">Valor Venda</h1>
+                        
+                           <h3 style="text-align: center;">Informe os valores disponíveis para iniciar as suas operações </h3>
+                        <p:tooltip />
+
+                        <p:messages id="messages" closable="true" />
+
+                           
+                           
+                             <p:panelGrid id="p"  columns="1" layout="grid" style="margin-bottom:2px;" styleClass="ui-panelgrid-blank form-group">
+                           
+                            <p:inputNumber id="default" required="true"  requiredMessage="Informe o Valor do Início da Caixa"/>
+                             <p:outputLabel value="Disponível em Caixa" />
+                           
+                            
+                           </p:panelGrid>
+
+                            
+
+                           
+                           
+                           
+
+                        <p:commandButton icon="fa fa-sign-in" id="submitButton" value="CONFIRMAR ABERTURA" update="@form"  styleClass="GreenButton"/>
+                    </div>
+                    <br/>
+                     
+                       <br/>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

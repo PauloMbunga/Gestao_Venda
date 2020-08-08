@@ -1,0 +1,173 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/dps/FN/templateFN.xhtml">
+
+    <ui:define name="title">Forms</ui:define>
+    <ui:define name="head">
+        <style type="text/css">
+            .nba-grid {
+                width: 100%;
+                table-layout: fixed;
+                word-wrap: break-word;
+            }
+
+            .ui-scrollpanel-content p:first-child {
+                margin: 0;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <f:metadata>
+             <o:viewParam name="Estoque" value="#{cadastroEstoqueBean.estoque}" />
+    		 <f:viewAction action="#{cadastroEstoqueBean.inicializar}" />
+    	</f:metadata>
+        <h:form id="form">
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+
+                        <h1 style="font-size:25px">#{cadastroEstoqueBean.editando ? 'Edição de Estoque' : 'Cadastrar Estoque'}</h1>
+                        <p:messages autoUpdate="true" closable="true" />
+                        <p:toolbar>
+                            <f:facet name="left">
+                                <p:button  value="Novo" icon="ui-icon-plus" outcome="/dps/FN/estoques/cadastrarEstoque" />
+                              
+                                <span class="ui-separator" style="padding-right: 5px;">
+                                    <span class="fa fa-ellipsis-v SoftGray" />
+                                </span>
+                                <p:commandButton  value="Salvar" title="Salvar" icon="ui-icon-save" update="@form" action="#{cadastroEstoqueBean.salvar}"/>
+	    				      
+	    				      <p:hotkey bind="ctrl+s"  update="@form" action="#{cadastroEstoqueBean.salvar}"/>
+ 
+	    			
+                            
+                            </f:facet>
+                            <f:facet name="right">
+                                <p:button value="Pesquisar" title="Pesquisar" icon="ui-icon-search" outcome="/dps/FN/estoques/pesquisarEstoque" />
+                                
+                               
+                            </f:facet>
+                        </p:toolbar>
+                        
+                     </div>   
+                     
+                     <div class="card card-w-title">
+                        
+                             <p:panelGrid id="panelEstoque"  columns="2" layout="grid" style="margin-bottom:2px;" styleClass="ui-panelgrid-blank form-group">
+
+
+
+
+                                 <h:panelGroup>
+                                   
+                                    <label>Produto</label><br />
+                            
+                                   <p:selectOneMenu id="produto" value="#{cadastroEstoqueBean.estoque.produto}" filter="true">
+	    			                <f:selectItem itemLabel="Selecione o Produto"/>
+	    			                <f:selectItems value="#{cadastroEstoqueBean.listaProdutos}" var="produto"
+	    			              	itemValue="#{produto}" itemLabel="#{produto.descricao}" />
+	    		                   </p:selectOneMenu>
+                                  
+                                  </h:panelGroup>
+                                  
+                                  <h:panelGroup>
+                                   
+                                    <label>Fornecedor</label><br />
+                            
+                                   <p:selectOneMenu id="fornecedor" value="#{cadastroEstoqueBean.estoque.fornecedor}" filter="true">
+	    			                <f:selectItem itemLabel="Selecione o fornecedor"/>
+	    			                <f:selectItems value="#{cadastroEstoqueBean.listaFornecedores}" var="fornecedor"
+	    			              	itemValue="#{fornecedor}" itemLabel="#{fornecedor.nome}" />
+	    		                   </p:selectOneMenu>
+                                  
+                                  </h:panelGroup>
+                                  
+                                  
+    
+                                  
+                                  <h:panelGroup>
+                                   
+                                    <label>Loja</label><br />
+                            
+                                   <p:selectOneMenu id="loja" value="#{cadastroEstoqueBean.estoque.loja}" filter="true">
+	    			                <f:selectItem itemLabel="Selecione a loja"/>
+	    			                <f:selectItems value="#{cadastroEstoqueBean.listaLojas}" var="loja"
+	    			              	itemValue="#{loja}" itemLabel="#{loja.nome}" />
+	    		                   </p:selectOneMenu>
+                                  
+                                  </h:panelGroup>
+                                  
+                                  
+                                  <h:panelGroup>
+                                   
+                                    <label>Unidade</label><br />
+                            
+                                   <p:selectOneMenu id="unidadeProduto" value="#{cadastroEstoqueBean.estoque.unidadeProduto}" filter="true">
+	    			                <f:selectItem itemLabel="Selecione a Unidade de Produto"/>
+	    			                <f:selectItems value="#{cadastroEstoqueBean.listaUnidadeProdutos}" var="unidadeProduto"
+	    			              	itemValue="#{unidadeProduto}" itemLabel="#{unidadeProduto.descricao}" />
+	    		                   </p:selectOneMenu>
+                                  
+                                  </h:panelGroup>
+                                  
+                                  <h:panelGroup>
+                                   
+                                        <label>Peso:</label><br />
+                                        <p:inputText style="width: 100%;" id="peso" required="true" requiredMessage="Informe o Peso" value="#{cadastroEstoqueBean.estoque.peso}"/>
+                                  </h:panelGroup>
+                                  
+                                  
+                                   <h:panelGroup>
+                                   
+                                        <label>Valor do Custo:</label><br />
+                                        <p:inputText style="width: 100%;" id="valor_custo" required="true" requiredMessage="Informe o Valor do Custo" value="#{cadastroEstoqueBean.estoque.valor_custo}"/>
+                                  </h:panelGroup>
+                                  
+                                  <h:panelGroup>
+                                   
+                                        <label>Valor da venda:</label><br />
+                                        <p:inputText style="width: 100%;" id="valor_venda" required="true" requiredMessage="Informe o Valor da Venda" value="#{cadastroEstoqueBean.estoque.valor_venda}"/>
+                                  </h:panelGroup>
+                                  
+                                  <h:panelGroup>
+                                   
+                                        <label>Estoque mínimo:</label><br />
+                                        <p:inputText style="width: 100%;" id="estq_min" required="true" requiredMessage="Informe o Estoque mínimo" value="#{cadastroEstoqueBean.estoque.estoque_min}"/>
+                                  </h:panelGroup>
+                                  
+                                  <h:panelGroup>
+                                   
+                                        <label>Estoque máximo:</label><br />
+                                        <p:inputText style="width: 100%;" id="estq_max" required="true" requiredMessage="Informe o Estoque máximo" value="#{cadastroEstoqueBean.estoque.estoque_max}"/>
+                                  </h:panelGroup>
+                                  
+                                  <h:panelGroup>
+                                   
+                                        <label>Quantidade Estoque:</label><br />
+                                        <p:inputText style="width: 100%;" id="estq_qtd" required="true" requiredMessage="Informe a Quantidade do Estoque" value="#{cadastroEstoqueBean.estoque.qtd_actual}"/>
+                                  </h:panelGroup>
+                                  
+                                   <h:panelGroup>
+                                     <label>Data da Compra:</label><br />
+                                     <p:calendar style="width: 100%;" id="data_compra" required="true" requiredMessage="Informe a Data da Compra" value="#{cadastroEstoqueBean.estoque.data_compra}"/>
+                                   </h:panelGroup>
+                                    
+                             </p:panelGrid>
+
+                           
+
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

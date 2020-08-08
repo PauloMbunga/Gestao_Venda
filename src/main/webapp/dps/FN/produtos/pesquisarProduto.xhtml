@@ -1,0 +1,129 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:o="http://omnifaces.org/ui"
+                template="/dps/FN/templateFN.xhtml">
+
+    <ui:define name="title">Pesquisar</ui:define>
+    <ui:define name="head">
+        <style type="text/css">
+            .nba-grid {
+                width: 100%;
+                table-layout: fixed;
+                word-wrap: break-word;
+            }
+
+            .ui-scrollpanel-content p:first-child {
+                margin: 0;
+            }
+
+        </style>
+    </ui:define>
+
+    <ui:define name="content">
+        <f:metadata>
+             <o:viewParam name="produto" value="#{cadastroProdutoBean.produto}" />
+    		 <f:viewAction action="#{cadastroProdutoBean.inicializar}" />
+    	</f:metadata>
+        <h:form id="frmPesquisa">
+        <p:messages autoUpdate="true" closable="true" />
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="card card-w-title">
+
+                        <h1 style="font-size:25px">Pesquisar Produto</h1>
+                        
+                        <p:toolbar>
+                            <f:facet name="left">
+                                                            
+                                <p:commandButton  value="Pesquisar" title="Pesquisar" icon="ui-icon-search" update="@form" action="#{pesquisarProdutosBean.pesquisar}"/>
+	    				      
+	    				      <p:hotkey bind="ctrl+p"  update="@form" action="#{pesquisarProdutosBean.pesquisar}"/>
+ 
+	    			
+                            
+                            </f:facet>
+                            <f:facet name="right">
+                                <p:button value="Novo" title="Novo" icon="ui-icon-plus" outcome="/dps/FN/produtos/cadastrarProduto" />
+                                
+                               
+                            </f:facet>
+                        </p:toolbar>
+                        
+                     </div>   
+                     
+                     <div class="card card-w-title">
+                        
+              <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+	    			>
+	    		<p:outputLabel value="Código Interno" for="codigo_interno"/>
+	    		<p:inputText id="codigo_interno" size="20" value="#{pesquisarProdutosBean.filtro.codigo_interno}" />
+	    		
+	    		<p:outputLabel value="Descrição" for="descricao"/>
+	    		<p:inputText id="descricao" size="60" value="#{pesquisarProdutosBean.filtro.descricao}" />
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="produtosTable" value="#{pesquisarProdutosBean.produtosFiltrados}" var="produto"
+	    		style="margin-top: 20px" emptyMessage="Nenhuma produto encontrado." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+                            
+                            <f:facet name="header">
+                                Produto
+                            </f:facet>
+                            <p:column headerText="Id" >
+                                <h:outputText value="#{produto.id}" />
+                            </p:column>
+
+                            <p:column headerText="Descrição" >
+                                <h:outputText value="#{produto.descricao}" />
+                            </p:column>
+
+                            <p:column headerText="Código Interno" >
+                                <h:outputText value="#{produto.codigo_interno}" />
+                            </p:column>
+                          
+                            
+                            <p:column headerText="Grupo de produto" >
+                                <h:outputText value="#{produto.grupoProduto.descricao}" />
+                            </p:column>
+                            
+                            <p:column headerText="Produto para Venda?" >
+                                <h:outputText value="#{produto.activo}" />
+                            </p:column>
+                            
+                            <p:column style="width: 100px; text-align: center">
+	    			<p:button outcome="/dps/FN/produtos/cadastrarProduto" icon="ui-icon-pencil" title="Editar">
+	    				<f:param name="produto" value="#{produto.id}" />
+	    			</p:button>
+	    			
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()"
+	    					process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{pesquisarProdutosBean.produtoSelecionado}" 
+	    					value="#{produto}" />
+	    			</p:commandButton>
+	    		</p:column>
+
+                            
+                        </p:dataTable>
+                        
+                       <p:confirmDialog header="Exclusão de produto" 
+	    		message="Tem certeza que deseja excluir a Produto #{pesquisarProdutosBean.produtoSelecionado.descricao}?"
+	    		widgetVar="confirmacaoExclusao"	id="confirmacaoExclusaoDialog">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;" />
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();"
+	    			action="#{pesquisarProdutosBean.excluir}" process="@this"
+	    			update=":frmPesquisa:produtosTable" />
+	    	</p:confirmDialog>
+                           
+
+                    </div>
+                </div>
+
+
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

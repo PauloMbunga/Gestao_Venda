@@ -38,19 +38,16 @@ public class LoginBean implements Serializable {
 			
 			FacesUtil.addErrorMessage("Usuário ou senha inválido!");
 		}
-		System.out.println("Hello World2");
+	
 	}
 	
 	
-	public void alo() {
-		
-		System.out.println("alo");
-	}
+	
 	
 	
 	
 	public void login() throws ServletException, IOException {
-		System.out.println("Hello World");
+	
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
 		dispatcher.forward(request, response);
 		

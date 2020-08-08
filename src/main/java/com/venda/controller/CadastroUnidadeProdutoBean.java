@@ -48,7 +48,7 @@ public class CadastroUnidadeProdutoBean implements Serializable {
 		this.unidadeProduto = cadastroUnidadeProdutoService.salvar(this.unidadeProduto);
 		limpar();
 		
-		FacesUtil.addInfoMessage("Forma de Pagamento salva com sucesso!");
+		FacesUtil.addInfoMessage("Unidade de produto salva com sucesso!");
 		
 	   } catch (NegocioException ne) {
 		FacesUtil.addErrorMessage(ne.getMessage());
